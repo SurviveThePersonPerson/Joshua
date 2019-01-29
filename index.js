@@ -150,19 +150,18 @@ bot.on("message", async message => {
     }
 
     if(cmd === `${prefix}wasted`){
-        if(!args || args[0] == "help") return message.channel.send("**Error**: *Incorrect Ussage*, Please format with `j!wasted <user>` or `j!wasted help`");
         if(args[0] == "help"){
-            let noteHelp = new Discord.RichEmbed()
+            let wastedHelp = new Discord.RichEmbed()
             .setTitle("Help")
             .setDescription("**Name**: Wasted\n**Usage**: `j!wasted <@user>`\n**Description**: `Sends GTA wasted of the user`\n**Permissions**: ")
             .setColor("#800000")
             .setTimestamp()
             .setFooter(`Requested by ${message.author.username}${message.author.discriminator}`, message.author.avatarURL);
-            return message.channel.send(noteHelp)
+            return message.channel.send(wastedHelp)
         }else
         {
             let DatUser =  message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
-            if(!DatUser) return message.channel.send("**Error**: *Incorrect Ussage*, Please format with `j!wasted <@prefix>` or `j!wasted help`");
+            if(!DatUser) return message.channel.send("**Error**: *Incorrect Ussage*, Please format with `j!wasted <@user>` or `j!wasted help`");
             request.get(`https://api.badosz.com/wasted?url=${DatUser.user.avatarURL}`).set({Authorization: apiKEY}).then(async response => {
                 console.log(response.body);
                 const buffer = response.body
@@ -207,6 +206,52 @@ bot.on("message", async message => {
                 const text = JSON.parse(response.text);
                 console.log(response.text);
                 return message.channel.send(text.joke);
+            });
+        }
+    }
+
+    if(cmd === `${prefix}invert`){
+        if(args[0] == "help"){
+            let inverthelp = new Discord.RichEmbed()
+            .setTitle("Help")
+            .setDescription("**Name**: Invert\n**Usage**: `j!wasted <@user>`\n**Description**: `Inverts mentioned users avatar`\n**Permissions**: ")
+            .setColor("#800000")
+            .setTimestamp()
+            .setFooter(`Requested by ${message.author.username}${message.author.discriminator}`, message.author.avatarURL);
+            return message.channel.send(inverthelp)
+        }else
+        {
+            let DatUser =  message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
+            if(!DatUser) return message.channel.send("**Error**: *Incorrect Ussage*, Please format with `j!invert <@user>` or `j!invert help`");
+            request.get(`https://api.badosz.com/invert?url=${DatUser.user.avatarURL}`).set({Authorization: apiKEY}).then(async response => {
+                console.log(response.body);
+                const buffer = response.body
+                let wastedmsg = new Discord.Attachment()
+                .setFile(buffer);
+                message.channel.send(wastedmsg);
+            });
+        }
+    }
+
+    if(cmd === `${prefix}blurple`){
+        if(args[0] == "help"){
+            let blurpleHelp = new Discord.RichEmbed()
+            .setTitle("Help")
+            .setDescription("**Name**: Blurple\n**Usage**: `j!blurple <@user>`\n**Description**: `Makes mentioned users avatar blue and purple.`\n**Permissions**: ")
+            .setColor("#800000")
+            .setTimestamp()
+            .setFooter(`Requested by ${message.author.username}${message.author.discriminator}`, message.author.avatarURL);
+            return message.channel.send(blurpleHelp)
+        }else
+        {
+            let DatUser =  message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
+            if(!DatUser) return message.channel.send("**Error**: *Incorrect Ussage*, Please format with `j!blurple <@user>` or `j!blurple help`");
+            request.get(`https://api.badosz.com/blurple?url=${DatUser.user.avatarURL}`).set({Authorization: apiKEY}).then(async response => {
+                console.log(response.body);
+                const buffer = response.body
+                let wastedmsg = new Discord.Attachment()
+                .setFile(buffer);
+                message.channel.send(wastedmsg);
             });
         }
     }
@@ -268,8 +313,24 @@ bot.on("message", async message => {
         }
     }
 
+    if(cmd === `${prefix}say`){
+        if(args[0] == "help"){
+            let sayHelp = new Discord.RichEmbed()
+            .setTitle("Help")
+            .setDescription("**Name**: Say\n**Usage**: `j!say <text>`\n**Description**: `Joshua says what you say!`\n**Permissions**: ")
+            .setColor("#800000")
+            .setTimestamp()
+            .setFooter(`Requested by ${message.author.username}${message.author.discriminator}`, message.author.avatarURL);
+            return message.channel.send(sayHelp)
+        }else
+        {
+            const sayMessage = args.join(" ");
+            message.delete().catch();
+            message.channel.send(sayMessage);
+        }
+    }
 
-    //PREFIX CMD
+    //General Commands
     if(cmd === `${prefix}prefix`){
         if(!message.member.hasPermission("MANAGE_GUILD")) return message.channel.send(`**Insufficient Permissions**: You are missing the permissions ` + "`MANAGE_GUILD`");
         if(!args[0] || args[0 == 'help']) return message.channel.send("**Error**: *Incorrect Ussage*, Please format with `j!prefix <prefix>` or `j!prefix help`");
@@ -304,7 +365,6 @@ bot.on("message", async message => {
         }
     }
 
-    //General Commands
     if(cmd === `${prefix}ping`){
         if(args[0] == "help"){
             let pingHelp = new Discord.RichEmbed()
@@ -344,11 +404,10 @@ bot.on("message", async message => {
     if(cmd === `${prefix}help`){
         let helpHelp = new Discord.RichEmbed()
         .setAuthor("Joshua's Help Menu", bot.user.avatarURL)
-        .setTitle("Commands [11]")
+        .setTitle("Commands [15]")
         .setDescription("For more info on a command, run `j!command help` :page_facing_up:")
-        .addField("Fun [8]", "`advice`, `yomama`, `why`, `dadjoke`, `chucknorris`, `fact`, `note`, `wasted`")
-        .addField("General [3]", "`botinfo`, `ping`, `prefix`")
-        .addField("Moderation [0]", "?")
+        .addField("Fun [11]", "`advice`, `yomama`, `why`, `dadjoke`, `chucknorris`, `fact`, `note`, `wasted`, `say`, `invert`, `blurple`")
+        .addField("General [4]", "`botinfo`, `ping`, `prefix`, `updatelogs`")
         .setColor("#800000")
         .setTimestamp()
         .setFooter(`Requested by ${message.author.username}${message.author.discriminator}`, message.author.avatarURL);
