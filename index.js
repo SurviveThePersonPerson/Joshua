@@ -388,13 +388,13 @@ bot.on("message", async message => {
         }
     }
 
-    if(cmd === `${prefix}botinfo`){
+    if(cmd === `${prefix}info`){
         let botiEmbed = new Discord.RichEmbed()
         .setColor("48d1cc")
         .setAuthor("Bot Information", bot.user.avatarURL)
-        .addField("Bot Info", `**Servers**: ${bot.guilds.size}\n**Users**: ${bot.users.size}\n**Channels**: ${bot.channels.size}\n**Client ID**: ${bot.user.id}\n**Uptime**: ${functions.mtrl(bot.uptime)}`)
-        .addField("Bot Process Info", `**Discord.js Version**: ${Discord.version}\n**Node.js Version**: ${process.version}\n**Memory Used**: ${(process.memoryUsage().heapUsed / 1048576).toFixed(2)}MB`)
-        .addField("Credits","<@252416364302696450> - Bot Owner/Developer\n<@335894501870665730> - Helper/Tester")
+        .addField("<:info:528365371166687232>Bot Info", `**Servers**: ${bot.guilds.size}\n**Users**: ${bot.users.size}\n**Channels**: ${bot.channels.size}\n**Client ID**: ${bot.user.id}\n**Uptime**: ${functions.mtrl(bot.uptime)}`)
+        .addField("<:botfloppydisk:539872932113940538>Bot Process Info", `**Discord.js Version**: ${Discord.version}\n**Node.js Version**: ${process.version}\n**Memory Used**: ${(process.memoryUsage().heapUsed / 1048576).toFixed(2)}MB`)
+        .addField(":page_facing_up:Credits","<@252416364302696450> - Bot Owner/Developer\n<@335894501870665730> - Helper/Tester")
         .setTimestamp()
         .setFooter(`Requested by ${message.author.username}${message.author.discriminator}`, message.author.avatarURL);
 
@@ -407,7 +407,8 @@ bot.on("message", async message => {
         .setTitle("Commands [15]")
         .setDescription("For more info on a command, run `j!command help` :page_facing_up:")
         .addField("Fun [11]", "`advice`, `yomama`, `why`, `dadjoke`, `chucknorris`, `fact`, `note`, `wasted`, `say`, `invert`, `blurple`")
-        .addField("General [4]", "`botinfo`, `ping`, `prefix`, `updatelogs`")
+        .addField("General [4]", "`info`, `ping`, `prefix`, `updatelogs`")
+	.addField("Moderation [0]", "none")
         .setColor("#800000")
         .setTimestamp()
         .setFooter(`Requested by ${message.author.username}${message.author.discriminator}`, message.author.avatarURL);
