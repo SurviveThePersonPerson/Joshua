@@ -153,7 +153,7 @@ bot.on("message", async message => {
         if(args[0] == "help"){
             let wastedHelp = new Discord.RichEmbed()
             .setTitle("Help")
-            .setDescription("**Name**: Wasted\n**Usage**: `j!wasted <@user>`\n**Description**: `Sends GTA wasted of the user`\n**Permissions**: ")
+            .setDescription("**Name**: Wasted\n**Usage**: `j!wasted <@user>`\n**Description**: `Sends GTA wasted of the user.`\n**Permissions**: ")
             .setColor("#800000")
             .setTimestamp()
             .setFooter(`Requested by ${message.author.username}${message.author.discriminator}`, message.author.avatarURL);
@@ -168,6 +168,28 @@ bot.on("message", async message => {
                 let wastedmsg = new Discord.Attachment()
                 .setFile(buffer);
                 message.channel.send(wastedmsg);
+            });
+        }
+    }
+
+    if(cmd === `${prefix}excuseme`){
+        if(args[0] == 'help'){
+        let excusemeHelp = new Discord.RichEmbed()
+            .setTitle("Help")
+            .setDescription("**Name**: Excuseme\n**Usage**: `j!excuseme <text>`\n**Description**: `Creats an excuse me meme with the text entered.`\n**Permissions**: ")
+            .setColor("#800000")
+            .setTimestamp()
+            .setFooter(`Requested by ${message.author.username}${message.author.discriminator}`, message.author.avatarURL);
+            return message.channel.send(excusemeHelp)
+        }else
+        {
+            if(!args) return message.channel.send("**Error**: *Incorrect Ussage*, Please format with `j!excuseme <text>` or `j!excuseme help`");
+            request.get(`https://api.badosz.com/excuseme?text=${args.join(" ")}`).set({Authorization: apiKEY}).then(async response => {
+            console.log(response.body);
+            const buffer = response.body
+            let excusemsg = new Discord.Attachment()
+            .setFile(buffer);
+            message.channel.send(excusemsg);
             });
         }
     }
@@ -214,7 +236,7 @@ bot.on("message", async message => {
         if(args[0] == "help"){
             let inverthelp = new Discord.RichEmbed()
             .setTitle("Help")
-            .setDescription("**Name**: Invert\n**Usage**: `j!wasted <@user>`\n**Description**: `Inverts mentioned users avatar`\n**Permissions**: ")
+            .setDescription("**Name**: Invert\n**Usage**: `j!wasted <@user>`\n**Description**: `Inverts mentioned users avatar.`\n**Permissions**: ")
             .setColor("#800000")
             .setTimestamp()
             .setFooter(`Requested by ${message.author.username}${message.author.discriminator}`, message.author.avatarURL);
@@ -252,6 +274,50 @@ bot.on("message", async message => {
                 let wastedmsg = new Discord.Attachment()
                 .setFile(buffer);
                 message.channel.send(wastedmsg);
+            });
+        }
+    }
+
+    if(cmd === `${prefix}trump`){
+        if(args[0] == "help"){
+            let blurpleHelp = new Discord.RichEmbed()
+            .setTitle("Help")
+            .setDescription("**Name**: Trump\n**Usage**: `j!trum[] <text>`\n**Description**: `Creates a forged trump tweet with the entered text.`\n**Permissions**: ")
+            .setColor("#800000")
+            .setTimestamp()
+            .setFooter(`Requested by ${message.author.username}${message.author.discriminator}`, message.author.avatarURL);
+            return message.channel.send(blurpleHelp)
+        }else
+        {
+            if(!args) return message.channel.send("**Error**: *Incorrect Ussage*, Please format with `j!trump <text>` or `j!trump help`");
+            request.get(`https://api.badosz.com/trump?text=${args.join(" ")}`).set({Authorization: apiKEY}).then(async response => {
+                console.log(response.body);
+                const buffer = response.body
+                let trumpMSG = new Discord.Attachment()
+                .setFile(buffer);
+                message.channel.send(trumpMSG);
+            });
+        }
+    }
+
+    if(cmd === `${prefix}tweet`){
+        if(args[0] == "help"){
+            let tweetHelp = new Discord.RichEmbed()
+            .setTitle("Help")
+            .setDescription("**Name**: Tweet\n**Usage**: `j!tweet <text>`\n**Description**: `Creates a tweet with your avatar and the entered text.`\n**Permissions**: ")
+            .setColor("#800000")
+            .setTimestamp()
+            .setFooter(`Requested by ${message.author.username}${message.author.discriminator}`, message.author.avatarURL);
+            return message.channel.send(tweetHelp)
+        }else
+        {
+            if(!args) return message.channel.send("**Error**: *Incorrect Ussage*, Please format with `j!tweet <text>` or `j!tweet help`");
+            request.get(`https://api.badosz.com/tweet?url=${message.author.avatarURL}&username=${message.author.username}&text=${args.join(" ")}`).set({Authorization: apiKEY}).then(async response => {
+                console.log(response.body);
+                const buffer = response.body
+                let tweetmsg = new Discord.Attachment()
+                .setFile(buffer);
+                message.channel.send(tweetmsg);
             });
         }
     }
@@ -392,9 +458,9 @@ bot.on("message", async message => {
         let botiEmbed = new Discord.RichEmbed()
         .setColor("48d1cc")
         .setAuthor("Bot Information", bot.user.avatarURL)
-        .addField("<:info:528365371166687232>Bot Info", `**Servers**: ${bot.guilds.size}\n**Users**: ${bot.users.size}\n**Channels**: ${bot.channels.size}\n**Client ID**: ${bot.user.id}\n**Uptime**: ${functions.mtrl(bot.uptime)}`)
-        .addField("<:botfloppydisk:539872932113940538>Bot Process Info", `**Discord.js Version**: ${Discord.version}\n**Node.js Version**: ${process.version}\n**Memory Used**: ${(process.memoryUsage().heapUsed / 1048576).toFixed(2)}MB`)
-        .addField(":page_facing_up:Credits","<@252416364302696450> - Bot Owner/Developer\n<@335894501870665730> - Helper/Tester")
+        .addField("Bot Info :information_source:", `**Servers**: ${bot.guilds.size}\n**Users**: ${bot.users.size}\n**Channels**: ${bot.channels.size}\n**Client ID**: ${bot.user.id}\n**Uptime**: ${functions.mtrl(bot.uptime)}`)
+        .addField("Bot Process Info :desktop:", `**Discord.js Version**: ${Discord.version}\n**Node.js Version**: ${process.version}\n**Memory Used**: ${(process.memoryUsage().heapUsed / 1048576).toFixed(2)}MB`)
+        .addField("Credits :page_facing_up:","<@252416364302696450> - Bot Owner/Developer\n<@335894501870665730> - Helper/Tester")
         .setTimestamp()
         .setFooter(`Requested by ${message.author.username}${message.author.discriminator}`, message.author.avatarURL);
 
@@ -404,11 +470,11 @@ bot.on("message", async message => {
     if(cmd === `${prefix}help`){
         let helpHelp = new Discord.RichEmbed()
         .setAuthor("Joshua's Help Menu", bot.user.avatarURL)
-        .setTitle("Commands [15]")
+        .setTitle("Commands [18]")
         .setDescription("For more info on a command, run `j!command help` :page_facing_up:")
-        .addField("Fun [11]", "`advice`, `yomama`, `why`, `dadjoke`, `chucknorris`, `fact`, `note`, `wasted`, `say`, `invert`, `blurple`")
+        .addField("Fun [14]", "`advice`, `yomama`, `why`, `dadjoke`, `chucknorris`, `fact`, `note`, `wasted`, `say`, `invert`, `blurple`, `excuseme`, `tweet`, `trump`")
         .addField("General [4]", "`info`, `ping`, `prefix`, `updatelogs`")
-	.addField("Moderation [0]", "none")
+	    .addField("Moderation [0]", "none")
         .setColor("#800000")
         .setTimestamp()
         .setFooter(`Requested by ${message.author.username}${message.author.discriminator}`, message.author.avatarURL);
